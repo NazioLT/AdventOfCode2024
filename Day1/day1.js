@@ -1,11 +1,15 @@
-function readText(text) {
-    const array = text.split(/[\s\n]+/);
-    let pair = true;
+function day1Part1(text) {
+    const array = text.split('\n');
 
-    let list1, list2;
+    let list1 = [];
+    let list2 = [];
     array.forEach(element => {
-        list2.push(element);
-        pair = !pair;
+        const lineValues = element.split("   ");
+        if(lineValues.length != 2)
+            return;
+
+        list1.push(Number(lineValues[0]));
+        list2.push(Number(lineValues[1]));
     });
 
     list1.sort();
@@ -13,10 +17,7 @@ function readText(text) {
 
     let totalDistance = 0;
     for (let i = 0; i < list1.length; i++) {
-        const element1 = list1[i];
-        const element2 = list2[i];
-
-        totalDistance += Math.abs(element1 - element2);
+        totalDistance += Math.abs(list1[i] - list2[i]);
     }
 
     alert(totalDistance);
@@ -25,6 +26,6 @@ function readText(text) {
 fetch("Day1Input.txt")
     .then((res) => res.text())
     .then((text) => {
-        readText(text);
+        day1Part1(text);
     })
     .catch((e) => console.error(e));
